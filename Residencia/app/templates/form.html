@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="col-8 m-auto pt-4 pb-2 text-center">
+        <h1>Cadastrar Projeto</h1>
+    </div>
+
+    <div class="col-8 m-auto pt-3 pb-2 text-center">
+        <a href="/" class="btn btn-info">Voltar</a>
+    </div>
+
+    <div class="col-8 m-auto pt-4 pb-2 text-center">
+        <form name="form" id="form" action="/create/" method="post">
+            {% csrf_token %}
+            <div class="form-group mt-4">Número do projeto: {{form.numeroProjeto }}</div>
+            <div class="form-group mt-4">Número do Sei: {{form.numeroSei }}</div>
+            <div class="form-group mt-4">Tipo de pagamento: {{form.numeroParcela }}</div>
+            <div class="form-group mt-4">Valor solicitado: {{form.valorSolicitado }}</div>
+            <div class="form-group mt-4">Título do projeto: {{form.tituloProjeto }}</div>
+            <div class="form-group mt-4">Status da Transação: {{form.statusTransacao }}</div>
+            <input type="submit" class="btn btn-success" value="Salvar">
+        </form>
+    </div>
+
+</body>
+</html>
