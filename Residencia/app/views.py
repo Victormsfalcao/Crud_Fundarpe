@@ -11,8 +11,3 @@ def form(request):
     data['form'] = projetoForm()
     return render(request, 'form.html', data)
 
-def create(request):
-    form = projetoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('home')
