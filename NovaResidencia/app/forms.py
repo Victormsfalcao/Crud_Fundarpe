@@ -8,6 +8,15 @@ class CadastroUsuarioForm(forms.ModelForm):
         fields = ["nome", "email", "senha", "setor"]
 
 
+class LoginForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
+    senha = forms.CharField(widget=forms.PasswordInput(attrs={"class": "form-control"}))
+
+    class Meta:
+        model = CadastroUsuario
+        fields = ["email", "senha"]
+
+
 class TransacaoForm(forms.ModelForm):
     usuario = forms.ModelChoiceField(
         queryset=CadastroUsuario.objects.all(), to_field_name="id"

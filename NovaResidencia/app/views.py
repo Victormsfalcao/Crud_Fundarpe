@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
-from .forms import CadastroUsuarioForm, TransacaoForm, ProcessoForm, ProjetoForm
+from django.contrib import messages
+from django.urls import reverse
+from .forms import (
+    CadastroUsuarioForm,
+    LoginForm,
+    TransacaoForm,
+    ProcessoForm,
+    ProjetoForm,
+)
 from .models import Projeto, Processo, CadastroUsuario, Transacao
 
 
-def home(request):
+def home(request, setor):
     projetos = Projeto.objects.all()
     usuarios = CadastroUsuario.objects.all()
     transacoes = Transacao.objects.all()
@@ -16,8 +24,28 @@ def home(request):
             "usuarios": usuarios,
             "transacoes": transacoes,
             "processos": processos,
+            "setor" : setor
         },
     )
+
+
+def form_login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            senha = form.cleaned_data.get("senha")
+            try:
+                usuario = CadastroUsuario.objects.get(email=email)
+                if usuario.senha == senha:
+                    return redirect(reverse('home', kwargs={'setor': usuario.setor}))
+                else:
+                    messages.error(request, "Senha incorreta")
+            except CadastroUsuario.DoesNotExist:
+                messages.error(request, "Usuário não encontrado")
+    else:
+        form = LoginForm()
+    return render(request, "login.html", {"form": form})
 
 
 def form_cadastro_usuario(request):

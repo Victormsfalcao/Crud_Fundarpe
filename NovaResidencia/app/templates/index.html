@@ -11,10 +11,11 @@
     <h1>1. Lista de Usuarios</h1>
     <ul>
         {% for usuario in usuarios %}
-        <li>{{ usuario.nome }} - {{ usuario.email }}</li>
+        <li>{{ usuario.nome }} - {{ usuario.email }} - {{usuario.setor}}</li>
         {% endfor %}
     </ul>
     <a href="{% url 'form_cadastro_usuario' %}">Adicionar Novo Usuario</a>
+    {% if setor == 'ADMIN' %}
     <h1>2. Lista de Transacoes</h1>
     <ul>
         {% for transacao in transacoes %}
@@ -36,6 +37,7 @@
         {% endfor %}
     </ul>
     <a href="{% url 'form_processo' %}">Adicionar Novo Processo</a>
+    {% endif %}
 </body>
 
 </html>

@@ -2,6 +2,7 @@ from django.urls import path
 
 from app.views import (
     home,
+    form_login,
     form_cadastro_usuario,
     form_transacao,
     form_processo,
@@ -9,7 +10,8 @@ from app.views import (
 )
 
 urlpatterns = [
-    path("", home, name="home"),
+    path("", form_login, name="login"),
+    path('home/<str:setor>/', home, name='home'),
     path("form_cadastro_usuario/", form_cadastro_usuario, name="form_cadastro_usuario"),
     path("form_transacao/", form_transacao, name="form_transacao"),
     path("form_projeto/", form_projeto, name="form_projeto"),
